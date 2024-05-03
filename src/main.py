@@ -21,7 +21,7 @@ async def pull(ctx):
     assetList = getAssetList()
     pulled = random.choice(list(assetList[card_type].keys()))
     resizedImage = resizeImage(getAsset(assetList[card_type][pulled]))
-    filename = assetList[card_type][pulled].replace(card_type + "/", "")
+    filename = "image" + assetList[card_type][pulled].replace(card_type + "/", "")[-4:]
     embed = discord.Embed(title=pulled, color=getColor("diamond"))
     embed.set_image(url=f"attachment://{filename}")
     await ctx.send(embed=embed, file=discord.File(resizedImage, filename=filename))
