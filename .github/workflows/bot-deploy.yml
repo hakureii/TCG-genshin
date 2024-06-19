@@ -17,9 +17,19 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify your desired Node.js version here
+
+      - name: Install JavaScript dependencies
+        run: |
+          cd src/gemini
+          npm install  # or yarn install if you prefer Yarn
 
       - name: Run bot
         env:
@@ -31,3 +41,4 @@ jobs:
             python3 src/main.py
             git pull
           done
+
