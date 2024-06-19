@@ -1,4 +1,4 @@
-import random, discord, asyncio, os
+import random, discord, asyncio, os, gemini
 from head import getAsset, getAssetList, getColor, getToken, getIntents, resizeImage, getColor
 from discord.ext.commands import Bot
 
@@ -9,6 +9,17 @@ async def on_ready():
     await asyncio.sleep(5*60*60)
     os.remove(os.environ["CONDITION"])
     await bot.close()
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+
+    if message.content.startswith("AI"):
+        response = gemini.run_ai(message.content.replace("AI ", ""))
+        await message.reply(response)
+
+    await bot.process_commands(message)
 
 @bot.command(name="refresh")
 async def refresh(ctx):
