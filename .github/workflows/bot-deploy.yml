@@ -34,6 +34,7 @@ jobs:
       - name: Run bot
         env:
           TOKEN: ${{ secrets.TOKEN }}
+          API_KEY: ${{ secrets.API_KEY }}
         run: |
           export CONDITION="IM_THE_REASON"
           touch "$CONDITION"
